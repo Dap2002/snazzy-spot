@@ -14,7 +14,7 @@ class Registration{
         }).then(response => response.json()) .then(json => {
             console.log(json)
             if (json.success) {
-                $("#register").html(`<h1> All registered!</h1><br><span>Go <a href="/login.html">login</a></span>`)
+                $(".register").html(`<h1> All registered!</h1><span>Go <a href="/login.html">login</a></span>`)
             } else {
                 $('.error').text(`Error: ${json.errors.code}`)
 
