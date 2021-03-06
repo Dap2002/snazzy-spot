@@ -22,7 +22,6 @@ function readURL(input) {
 function upload(file) {
     const formData = new FormData();
     formData.append('file', file)
-    console.log(file)
     fetch('/api/images', {
         method: 'POST',
         body: formData
@@ -39,6 +38,7 @@ function removeUpload() {
 }
 
 $(document).ready(() => {
+    loadImages()
     const imageUpload = $(".image-upload-wrap")
     imageUpload.bind('dragover', function () {
         imageUpload.addClass('image-dropping');
@@ -48,4 +48,12 @@ $(document).ready(() => {
     });
 })
 
+function loadImages(){
+    fetch('/api/images', {
+        method: 'GET',
+    }).then(response => response.json()).then(response => {
+       for(let i=0; i< response.length; i++){
 
+       }
+    })
+}
