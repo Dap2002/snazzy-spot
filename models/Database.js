@@ -5,11 +5,6 @@ require('dotenv').config()
 
 class Database {
     //database connection files - local server must be configured with these details
-    static hostName = "localhost";
-    static username = "root";
-    static password = "penpal1!";
-    static conn;
-
     constructor(){
         this.mysql = require('mysql');
         Database.conn = this.mysql.createConnection({
