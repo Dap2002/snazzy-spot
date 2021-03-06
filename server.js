@@ -79,7 +79,14 @@ app.get('/api/status', (req, res) => {
 });
 
 app.post("/api/submit_quiz", (request, response)=>{
+    sess = request.session;
 
     let quiz = new Store_Quiz(request.body.responses);
+    console.debug(quiz.check_responses());
+    if(quiz.check_responses()){
+        quiz.store_responses(sess.userid, function(result){
+            response.send({"success": result});
+        });
+    }
 
 });

@@ -41,8 +41,11 @@ class Quiz{
         }
         if(this.question_number == 7){
             alert("test completed!");
+            this.collect_input();
             this.upload_responses();
         }
+        this.collect_input();
+        this.show_question();
     }
 
     upload_responses(){
@@ -57,10 +60,26 @@ class Quiz{
             body: JSON.stringify(responses),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
-            console.log(json)
-
+            if(json.success){
+                this.show_success_screen();
+            }
+            else{
+                alert("could not do quiz.")
+            }
         });
 
+    }
+
+    show_success_screen(){
+        $("#questionDiv").css("display", "none");
+        $("#questionTitle").text("Completed!");
+        $("#question").text("You have completed the personality test.");
+        $("#left").text(" ");
+        $("#right").text(" ");
+        $("#nextQ").prop("onclick", null).off("click");
+        $("#nextQ").click(function(){
+            window.location.assign("profile.html");
+        });
     }
 
 }
@@ -75,8 +94,7 @@ $(document).ready(function(){
     $("#nextQ").click(function(){
         console.log("next question");
         quiz.check_status();
-        quiz.collect_input();
-        quiz.show_question();
+
     });
 
 });
