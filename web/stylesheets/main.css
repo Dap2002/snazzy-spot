@@ -10,6 +10,10 @@ body {
   margin: 60px auto 0;
   cursor: pointer;
 }
+.menu a {
+  text-decoration: none;
+  color: #000 !important;
+}
 
 .title {
   width: 100%;

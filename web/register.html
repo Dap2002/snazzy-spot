@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snazzy Spot - Register</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="stylesheets/main.css" rel="stylesheet"/>
+    <script src="js/main.js"></script>
+    <script src="js/Registration.js"></script>
+</head>
+<body>
+<nav class="menu">
+    <div id="nav_toggle" class="title">Register<span class="fa fa-bars"></span>
+        <div class="arrow"></div>
+    </div>
+    <div class="dropdown">
+        <p><a href="index.html">Home</a></p>
+        <p><a href="signin.html">Sign In </a></p>
+        <p>Sign Out <span class="fa fa-sign-out"></span></p>
+    </div>
+</nav>
+<div class="register">
+    <h1>Register</h1>
+    <label for="fullName">Full name</label>
+    <input type="text" placeholder="Joe Doe" id="fullName" required/>
+    <label for="email">Email</label>
+    <input type="email" placeholder="joe.doe@example.org" id="email" required/>
+    <label for="password">Password</label>
+    <input type="password" placeholder="*******" id="password" required/>
+    <label for="snapchat">Snapchat username</label>
+    <input type="text" placeholder="JoeDoe4Lyfe" id="snapchat" required/>
+    <label for="bio">Quickly tell us about you</label><textarea id="bio">I am a fun, panda loving person.
+        I enjoy eating Ben and Jerry's (duh), except for that new Netflix ice cream they released, that was disgusting :-(</textarea>
+</div>
+</body>
+</html>
