@@ -51,17 +51,26 @@ app.post("/api/register",
 
 
 app.post("/api/login", (request, response)=>{
-    sess = request.session;
+   sess = request.session;
    let login_session = new Login_User(request.body);
    login_session.check_user(function(result){
-       if(!result){
+       if (!result) {
            response.send({"success": false});
-       }
-       else{
+       } else {
            sess.userid = result[0]["id"];
            sess.loggedInStatus = true;
            sess.username = result[0]["full_name"];
-           response.send({success:true});
+           response.send({success: true});
        }
    });
 });
+app.get('/api/status', (req, res) => {
+    try {
+        if (req.session.loggedInStatus) {
+            res.send({logged_in: true, username: req.session.username, id: req.session.userid})
+        }
+        res.send({logged_in: false})
+    } catch (e) {
+        res.send({logged_in: false})
+    }
+})

@@ -26,6 +26,11 @@ class Registration{
 
 
 $(document).ready(function(){
+    login((user)=>{
+        if(user.logged_in){
+            $(".register").html("<h1>Already logged in!</h1>")
+        }
+    })
     let new_user = new Registration();
     $("#submitBtn").click(function(){
        new_user.register_user();
