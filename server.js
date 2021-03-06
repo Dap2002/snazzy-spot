@@ -2,6 +2,7 @@
 const http = require('http');
 const express = require('express');
 const path = require('path');
+const Register_User = require('./api/Register_User');
 
 let app = express();
 app.use(express.json());
@@ -17,3 +18,8 @@ console.debug('Server listening on port ' + port);
 app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+
+app.post("/register.html", function(request, response){
+    response.send("hello");
+    let new_user = new Register_User(request.body);
+});
