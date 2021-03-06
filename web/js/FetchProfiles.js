@@ -50,6 +50,9 @@ class FetchProfiles{
             let average = total/8
             this.profiles[i]["average"] = average;
         }
+        this.profiles.sort(function(a, b){
+           return a.average - b.average;
+        });
     }
 
     select_profile(profile_id){
@@ -63,6 +66,7 @@ class FetchProfiles{
             $("#bio").text(json[0]["bio"]);
             $("#snap").text(json[0]["snapchat_handle"]);
         });
+
     }
 }
 
