@@ -68,8 +68,9 @@ app.get('/api/status', (req, res) => {
     try {
         if (req.session.loggedInStatus) {
             res.send({logged_in: true, username: req.session.username, id: req.session.userid})
+        } else {
+            return res.send({logged_in: false})
         }
-        res.send({logged_in: false})
     } catch (e) {
         res.send({logged_in: false})
     }

@@ -9,7 +9,8 @@ function login(callback=()=>{return false}) {
     }).then(response => response.json()).then(json => {
         if (json.logged_in) {
             $("#signin").text(json.username)
-            $("#signin").attr('href', 'manage.html')
+            $(".signin").html(`${json.username} <span class="fa fa-bars"></span>`)
+            $("#signin").attr('href', 'profile.html')
         }
         callback(json)
     });
