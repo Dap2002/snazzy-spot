@@ -46,7 +46,7 @@ class Database {
         Database.conn.query(`create table if not exists photos
                              (
                                  user      int         null,
-                                 filename  varchar(32) unique not null,
+                                 filename  varchar(36) unique not null,
                                  extension varchar(32) not null,
                                  primary key (filename),
                                  constraint photos_users_id_fk

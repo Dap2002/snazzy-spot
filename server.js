@@ -4,9 +4,14 @@ const express = require('express');
 const path = require('path');
 const Register_User = require('./api/Register_User');
 const Login_User = require('./api/Login_User');
+const Manage_User = require('./api/Manage_User');
 const Store_Quiz = require('./api/Store_Quiz');
-
+const formidable = require('formidable')
+const fs = require('fs');
 let app = express();
+let md5 = require("md5");
+var uuid = require('uuid');
+
 app.use(express.json());
 //static content
 app.use("/", express.static(__dirname + '/web'));
@@ -24,6 +29,17 @@ const session = require("express-session");
 app.use(session({secret: 'ssshhhhh'}));
 var sess;
 
+function isLoggedIn(req, res, next) {
+    try {
+        if (req.session.loggedInStatus) {
+            next()
+        } else {
+            res.send({success: false, error: 'Not logged in!'});
+        }
+    } catch (e) {
+        res.send({success: false, error: 'Not logged in!'});
+    }
+}
 const {check, validationResult} = require("express-validator");
 // Format for a route: app.post('/intended route', (request, result)=>{doSomething})
 app.post("/api/register",
@@ -78,15 +94,28 @@ app.get('/api/status', (req, res) => {
     }
 });
 
-app.post("/api/submit_quiz", (request, response)=>{
+app.post("/api/submit_quiz", isLoggedIn, (request, response) => {
     sess = request.session;
 
     let quiz = new Store_Quiz(request.body.responses);
     console.debug(quiz.check_responses());
-    if(quiz.check_responses()){
-        quiz.store_responses(sess.userid, function(result){
+    if (quiz.check_responses()) {
+        quiz.store_responses(sess.userid, function (result) {
             response.send({"success": result});
         });
     }
-
 });
+
+app.post('/api/images', isLoggedIn, (req, res) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req);
+    const filename = uuid.v1();
+    form.on('fileBegin', function (name, file) {
+        file.path = __dirname + '/web/profiles/' + filename + path.extname(file.name)
+    });
+    form.on('file', function (name, file) {
+        Manage_User.addImage(req.session.userid, filename, path.extname(file.name))
+        res.send({success: true})
+    });
+});
+

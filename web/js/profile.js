@@ -20,11 +20,12 @@ function readURL(input) {
 }
 
 function upload(file) {
+    const formData = new FormData();
+    formData.append('file', file)
     console.log(file)
-    fetch('http://www.example.net', {
+    fetch('/api/images', {
         method: 'POST',
-        headers: {},
-        body: file
+        body: formData
     }).then(response => response.json()).then(response => {
         console.log(response)
     })
