@@ -144,7 +144,7 @@ app.post('/api/fetch_user_metrics', (request, response) => { //add isloggedin
 app.post('/api/fetch_profile', (request, response) => { //add isloggedin
     sess = request.session;
     let user = new Manage_User();
-    user.fetch_user_with_photos(1, function(res){
+    user.fetch_user_with_photos(request.body.profile_id, function(res){
         response.send(res);
     });
 });

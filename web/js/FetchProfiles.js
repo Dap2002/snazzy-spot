@@ -10,7 +10,7 @@ class FetchProfiles{
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
             json = json[0]
-            for (let i=0; i<7; i++){
+            for (let i=0; i<8; i++){
                 this.own_profile.push(json["metric_"+i+1]);
             }
         });
@@ -61,7 +61,8 @@ class FetchProfiles{
             body: JSON.stringify({"profile_id":profile_id}),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
-            $("#profileImage").attr("src", +"./images/"+json[0]["filename"]+json[0]["extension"]);
+            console.log(json);
+            $("#profileImage").attr("src", "./profiles/"+json[0]["filename"]+json[0]["extension"]);
             $("#name").text(json[0]["full_name"]);
             $("#bio").text(json[0]["bio"]);
             $("#snap").text(json[0]["snapchat_handle"]);
@@ -72,8 +73,9 @@ class FetchProfiles{
 
 $(document).ready(function(){
     let display_profile = new FetchProfiles();
-    display_profile.get_user_metrics();
-    display_profile.fetch_profiles_list();
-    display_profile.sort_profiles();
-    display_profile.select_profile(display_profile.profiles[0]["id"]);
+    //display_profile.get_user_metrics();
+    //display_profile.fetch_profiles_list();
+    //display_profile.sort_profiles();
+    //display_profile.select_profile(display_profile.profiles[0]["id"]);
+    display_profile.select_profile(3);
 });
