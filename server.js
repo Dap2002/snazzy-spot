@@ -20,22 +20,21 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 const {check, validationResult} = require("express-validator");
-
-app.post("/",
-    check('full_name').isLength({min:3}),
+// Format for a route: app.post('/intended route', (request, result)=>{doSomething})
+app.post("/api/register",
+    check('full_name').isLength({min: 3}),
     check('email').isEmail(),
     check('password').isStrongPassword(),
-    check('bio').isLength({min:10, max:200}),
-    check('snapchat').isLength({min:2, max:128})
-, function(request, response){
-    const errors = validationResult(request);
-    if(!errors.isEmpty()){
-        response.send({"success":false});
-    }
-    else {
-        let new_user = new Register_User(request.body);
-        new_user.insert_new_user(function (result) {
-            response.send({"success": result});
-        });
-    }
-});
+    check('bio').isLength({min: 10, max: 200}),
+    check('snapchat').isLength({min: 2, max: 128}),
+    (request, response) => {
+        const errors = validationResult(request);
+        if (!errors.isEmpty()) {
+            response.send({"success": false});
+        } else {
+            let new_user = new Register_User(request.body);
+            new_user.insert_new_user(function (result) {
+                response.send({"success": result});
+            });
+        }
+    });
