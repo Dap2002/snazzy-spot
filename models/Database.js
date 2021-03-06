@@ -8,9 +8,9 @@ class Database {
     constructor(){
         this.mysql = require('mysql');
         Database.conn = this.mysql.createConnection({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USERNAME,
-            password: process.env.DB_PASSWORD,
+            host:"localhost",
+            user: "root",
+            password: "penpal1!",
             multipleStatements: true
         });
         Database.conn.connect(function(err) {
@@ -59,21 +59,6 @@ class Database {
         return input_array;
     }
 
-
-    check_user(data, callback){
-        data = this.sanitize_inputs(data);
-        let password = md5(data["password"]);
-        let email = data["email"];
-        Database.conn.query("SELECT * FROM users WHERE email='"+email+"' AND password='"+password+"'", function(err, result1){
-            if(err) throw err;
-            if(result1.length > 0){
-                return callback(result1);
-            }
-            else{
-                return callback(false);
-            }
-        });
-    }
 }
 
 module.exports = Database;

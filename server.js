@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const Register_User = require('./api/Register_User');
+const Login_User = require('./api/Login_User');
 
 let app = express();
 app.use(express.json());
@@ -18,6 +19,9 @@ console.debug('Server listening on port ' + port);
 app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+const session = require("express-session");
+app.use(session({secret: 'ssshhhhh'}));
+var sess;
 
 const {check, validationResult} = require("express-validator");
 // Format for a route: app.post('/intended route', (request, result)=>{doSomething})
@@ -38,3 +42,20 @@ app.post("/api/register",
             });
         }
     });
+
+
+app.post("/api/login", (request, response)=>{
+    sess = request.session;
+   let login_session = new Login_User(request.body);
+   login_session.check_user(function(result){
+       if(!result){
+           response.send({"success": false});
+       }
+       else{
+           sess.userid = result[0]["id"];
+           sess.loggedInStatus = true;
+           sess.username = result[0]["full_name"];
+           response.send({success:true});
+       }
+   });
+});
