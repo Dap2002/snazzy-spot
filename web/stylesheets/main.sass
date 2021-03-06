@@ -39,31 +39,41 @@ span
   transition: all 0.5s
 
 .down
-  max-height: 150px
+  max-height: 200px
 
-p
-  padding: 15px 14px
-  margin: 0
-  transition: all 0.1s
+.menu
+  p
+    padding: 15px 14px
+    margin: 0
+    transition: all 0.1s
 
-  &:hover
-    background: coral
-    -webkit-transform: scale(1.05)
-    color: rgba(255, 255, 255, 0.8)
-    box-shadow: 0 0 30px -10px #000
+    &:hover
+      background: coral
+      -webkit-transform: scale(1.05)
+      color: rgba(255, 255, 255, 0.8)
+      box-shadow: 0 0 30px -10px #000
 
 
-.register, .login, .quiz, .profile, .profilecard
+.register, .login, .quiz, .profile, .profilecard, .groups
   width: 40%
   border-radius: 10px
   text-align: center
-
-  background-color: rgba(255,255,255, 0.9)
+  background-color: rgba(255, 255, 255, 0.9)
   margin: 10px auto
   padding: 10px 0
+
+  ul
+    list-style-type: none
+    padding: 0
+
+    li
+      a
+        color: black
   .error
+    display: block
     color: red
     font-weight: bold
+
   button
     display: block
     cursor: pointer
@@ -128,9 +138,22 @@ p
 
 .profile
   background-color: #ffffff
-  width: 600px
+  width: 900px
   margin: 0 auto
   padding: 20px
+
+  #photos
+    height: 400px
+    overflow-y: scroll
+    width: 100%
+
+    .image
+      display: inline-block
+      width: 25%
+
+      img
+        height: 125px
+        max-width: 100%
 
 .file-upload-btn
   width: 100%
@@ -241,4 +264,5 @@ p
   -ms-transform: translateY(-50%)
   transform: translateY(-50%)
   font-weight: bolder
+
 
