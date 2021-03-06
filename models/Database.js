@@ -1,6 +1,7 @@
 //include files
 let sanitizer = require("sanitizer");
 let md5 = require("md5");
+require('dotenv').config()
 
 class Database {
     //database connection files - local server must be configured with these details
@@ -12,9 +13,9 @@ class Database {
     constructor(){
         this.mysql = require('mysql');
         Database.conn = this.mysql.createConnection({
-            host: Database.hostName,
-            user: Database.username,
-            password: Database.password,
+            host: process.env.DB_HOST,
+            user: process.env.DB_USERNAME,
+            password: process.env.DB_PASSWORD,
             multipleStatements: true
         });
         Database.conn.connect(function(err) {
