@@ -9,7 +9,7 @@ function readURL(input) {
             $('.file-upload-image').attr('src', e.target.result);
             $('.file-upload-content').show();
 
-            $('.image-title').html(input.files[0].name);
+            $('.image-title').html(input.files[0].name.substring(0, 15));
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -19,15 +19,32 @@ function readURL(input) {
     }
 }
 
+function upload(file) {
+    console.log(file)
+    fetch('http://www.example.net', {
+        method: 'POST',
+        headers: {},
+        body: file
+    }).then(response => response.json()).then(response => {
+        console.log(response)
+    })
+}
+
 function removeUpload() {
-    $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+    const fileUpload = $(".file-upload-input")
+    fileUpload.replaceWith(fileUpload.clone());
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
 }
 
-$('.image-upload-wrap').bind('dragover', function () {
-    $('.image-upload-wrap').addClass('image-dropping');
-});
-$('.image-upload-wrap').bind('dragleave', function () {
-    $('.image-upload-wrap').removeClass('image-dropping');
-});
+$(document).ready(() => {
+    const imageUpload = $(".image-upload-wrap")
+    imageUpload.bind('dragover', function () {
+        imageUpload.addClass('image-dropping');
+    });
+    imageUpload.bind('dragleave', function () {
+        imageUpload.removeClass('image-dropping');
+    });
+})
+
+

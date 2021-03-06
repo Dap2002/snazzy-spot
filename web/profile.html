@@ -27,9 +27,9 @@
     </button>
 
     <div class="image-upload-wrap">
-        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*"/>
+        <input class="file-upload-input" id="image" type='file' onchange="readURL(this);" accept="image/*"/>
         <div class="drag-text">
-            <h3>Drag and drop a file or select add Image</h3>
+            <h3>Drop a photo here!</h3>
         </div>
     </div>
     <div class="file-upload-content">
@@ -37,6 +37,7 @@
         <div class="image-title-wrap">
             <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span>
             </button>
+            <button type="button" onclick='upload($("#image").prop("files")[0])'>Upload photo</button>
         </div>
     </div>
 </div>
