@@ -2,6 +2,27 @@ class FetchProfiles{
     constructor() {
         this.profiles = [];
         this.own_profile = []
+        this.current_profile_id = null;
+        this.current_profile_index = 0;
+    }
+
+    accept_or_reject(profile_id, accept){
+        fetch('/api/accept_reject', {
+            method: "POST",
+            body: JSON.stringify({"profile_id":profile_id, "accept":accept}),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+        }).then(response => response.json()) .then(json => {
+            if(json["success"]) {
+                this.current_profile_index += 1;
+                if(this.current_profile_index >= this.profiles.length){
+                    this.show_error();
+                }
+                this.select_profile(this.profiles[this.current_profile_index]["id"]);
+            }
+            else{
+                alert("Error - could not accept/reject!");
+            }
+        });
     }
 
     get_user_metrics(){
@@ -66,16 +87,32 @@ class FetchProfiles{
             $("#name").text(json[0]["full_name"]);
             $("#bio").text(json[0]["bio"]);
             $("#snap").text(json[0]["snapchat_handle"]);
+            this.current_profile_id = json[0]["id"];
         });
+    }
 
+    show_error(){
+        $("#similarityRating").css("display", "none");
+        $("#rejectBtn").css("display", "none");
+        $("#acceptBtn").css("display", "none");
+        $("#profile").html("<h1>Sorry, there's no-one currently looking.</h1><p>Check back later to see if more come up.</p>")
     }
 }
 
 $(document).ready(function(){
     let display_profile = new FetchProfiles();
-    //display_profile.get_user_metrics();
-    //display_profile.fetch_profiles_list();
-    //display_profile.sort_profiles();
-    //display_profile.select_profile(display_profile.profiles[0]["id"]);
-    display_profile.select_profile(3);
+    display_profile.get_user_metrics();
+    display_profile.fetch_profiles_list();
+    if(display_profile.profiles.length == 0){
+       display_profile.show_error();
+    }
+    display_profile.sort_profiles();
+    display_profile.select_profile(1);
+    $("#rejectBtn").click(function(){
+        display_profile.accept_or_reject(display_profile.current_profile_id, 0);
+    });
+    $("#acceptBtn").click(function(){
+        display_profile.accept_or_reject(display_profile.current_profile_id, 1);
+    });
+
 });

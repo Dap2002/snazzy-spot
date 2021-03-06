@@ -155,6 +155,20 @@ app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 1
         const group = new Manage_Group();
         group.create_group(req.body.name, req.body.description, req.session.userid, () => {
             return true
-        })
+        });
         res.send({success: true})
-    })
+    });
+
+app.post('/api/accept_reject',(request, response) => {
+    sess = request.session;
+    const acceptOrReject = new Manage_User();
+    acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
+       if(result["affectedRows"] == 1){
+           response.send({"success":true});
+       }
+       else{
+           response.send({"success":false});
+       }
+    });
+
+});

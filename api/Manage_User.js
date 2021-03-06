@@ -32,5 +32,12 @@ class ManageUser extends Database {
         });
     }
 
+    add_accept(user1, user2, accept, callback){
+        Database.conn.query("INSERT INTO views(user1, user2, accept) VALUES ("+user1+", "+user2+", "+accept+")", function(err,result){
+           if (err) throw err;
+           return callback(result);
+        });
+    }
+
 }
 module.exports = ManageUser;
