@@ -1,5 +1,5 @@
 /**
- * Script to include on each page
+ * Script to include on each browser page
  * Manages account details
  **/
 $(document).ready(function () {
