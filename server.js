@@ -118,4 +118,9 @@ app.post('/api/images', isLoggedIn, (req, res) => {
         res.send({success: true})
     });
 });
+app.get('/api/images', isLoggedIn, (req, res) => {
+    Manage_User.getImages(req.session.userid, (response) => {
+        res.send(response);
+    })
+})
 

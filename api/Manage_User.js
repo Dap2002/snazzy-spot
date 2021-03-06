@@ -11,5 +11,12 @@ class ManageUser extends Database {
             return response;
         })
     }
+
+    static getImages(userID, callback) {
+        Database.conn.query('SELECT * FROM photos where user = ?', userID, (err, response) => {
+            callback(response);
+        });
+    }
+
 }
 module.exports = ManageUser;
