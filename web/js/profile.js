@@ -26,7 +26,9 @@ function upload(file) {
         method: 'POST',
         body: formData
     }).then(response => response.json()).then(response => {
-        console.log(response)
+        if (response.success) {
+            window.location.reload();
+        }
     })
 }
 
@@ -53,7 +55,7 @@ function loadImages(){
         method: 'GET',
     }).then(response => response.json()).then(response => {
        for(let i=0; i< response.length; i++){
-
+           $("#photos").append(`<div class='image'><img src="/profiles/${response[i].filename + response[i].extension}" alt="User image">`)
        }
     })
 }
