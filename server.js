@@ -163,12 +163,19 @@ app.post('/api/accept_reject',(request, response) => {
     sess = request.session;
     const acceptOrReject = new Manage_User();
     acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
-       if(result["affectedRows"] == 1){
-           response.send({"success":true});
-       }
-       else{
-           response.send({"success":false});
-       }
+        if(result["affectedRows"] == 1){
+            response.send({"success":true});
+        }
+        else{
+            response.send({"success":false});
+        }
     });
+});
 
+app.post('/api/fetch_matches',(request, response) => {
+    sess = request.session;
+    const matches = new Manage_User();
+    matches.fetch_matches(sess.userid, function(result){
+        console.debug(result);
+    });
 });

@@ -39,5 +39,9 @@ class ManageUser extends Database {
         });
     }
 
+    fetch_matches(userId, callback){
+        Database.conn.query("SELECT * FROM users, ")
+    }
+
 }
 module.exports = ManageUser;
