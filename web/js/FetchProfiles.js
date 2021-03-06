@@ -1,4 +1,4 @@
-class Profiles{
+class FetchProfiles{
     constructor() {
         alert("hello");
     }
