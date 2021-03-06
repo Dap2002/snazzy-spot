@@ -6,6 +6,7 @@ const Register_User = require('./api/Register_User');
 const Login_User = require('./api/Login_User');
 const Manage_User = require('./api/Manage_User');
 const Store_Quiz = require('./api/Store_Quiz');
+const Fetch_Profile = require('./api/Fetch_Profiles');
 const formidable = require('formidable')
 const fs = require('fs');
 let app = express();
@@ -122,5 +123,10 @@ app.get('/api/images', isLoggedIn, (req, res) => {
     Manage_User.getImages(req.session.userid, (response) => {
         res.send(response);
     })
-})
+});
 
+app.post('/api/fetch_profiles', isLoggedIn, (request, result) => {
+    sess = request.session;
+    let profiles = new Fetch_Profile(sess.userid);
+    profiles.fetch_profiles();
+});

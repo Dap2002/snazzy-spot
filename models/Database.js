@@ -56,7 +56,13 @@ class Database {
                              )
             comment 'table for storing all the photos';`, (err) => {
             if (err) throw err;
-        })
+        });
+
+        Database.conn.query("CREATE TABLE IF NOT EXISTS views (user1 int not null, user2 int not null, " +
+            "accept int not null, foreign key(user1) references users(id) on update cascade on delete cascade, " +
+            "foreign key(user2) references users(id) on update cascade on delete cascade)", function(err, result){
+            if (err) throw err;
+        });
 
     }
 
