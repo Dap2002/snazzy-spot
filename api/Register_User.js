@@ -1,5 +1,4 @@
 const Database = require ("../models/Database");
-const Validator = require("validatorjs");
 
 class Register_User extends Database{
     constructor(user_data){
@@ -8,6 +7,5 @@ class Register_User extends Database{
 
     }
 }
-
 
 module.exports = Register_User;
