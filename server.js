@@ -19,7 +19,19 @@ app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-app.post("/register.html", function(request, response){
+const {check, validationResult} = require("express-validator/check");
+
+app.post("/register.html",[
+    check('full_name').isLength({min:3}),
+    check('email').isEmail(),
+    check('password').isStrongPassword(),
+    check('bio').isLength({min:10, max:200}),
+    check('snapchat').isLength({min:2, max:128})
+], function(request, response){
+    const errors = validationResult(request);
+    if(!errors.isEmpty()){
+        return response.status(422).json({ errors: errors.array() })
+    }
     response.send("hello");
     let new_user = new Register_User(request.body);
 });
