@@ -26,11 +26,11 @@ var sess;
 const {check, validationResult} = require("express-validator");
 // Format for a route: app.post('/intended route', (request, result)=>{doSomething})
 app.post("/api/register",
-    check('full_name').isLength({min: 3}),
-    check('email').isEmail(),
-    check('password').isStrongPassword(),
-    check('bio').isLength({min: 10, max: 200}),
-    check('snapchat').isLength({min: 2, max: 128}),
+    check('full_name').isLength({min: 3}).escape(),
+    check('email').isEmail().escape(),
+    check('password').isStrongPassword().escape(),
+    check('bio').isLength({min: 10, max: 200}).escape(),
+    check('snapchat').isLength({min: 2, max: 128}).escape(),
     (request, response) => {
         const errors = validationResult(request);
         if (!errors.isEmpty()) {
