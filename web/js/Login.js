@@ -16,6 +16,11 @@ class Login{
 
 
 $(document).ready(function(){
+    login((user)=>{
+        if(user.logged_in){
+            $(".login").html("<h1>Already logged in!</h1>")
+        }
+    })
     let new_user = new Login();
     $("#submitBtn").click(function(){
         new_user.login_user();
