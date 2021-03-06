@@ -12,11 +12,11 @@ class Registration{
             body: JSON.stringify(this.user_details),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
-            console.log(json);
+            console.log(json)
             if (json.success) {
-                $("#register").html(`<h1> All registered!</h1><br><span>Go <a href="/login.html">login</a></span>`)
+                $(".register").html(`<h1> All registered!</h1><span>Go <a href="/login.html">login</a></span>`)
             } else {
-                $('.error').text(`Error: ${json.error}`)
+                $('.error').text(`Error: ${json.errors.code}`)
 
             }
         });
@@ -26,8 +26,13 @@ class Registration{
 
 
 $(document).ready(function(){
+    login((user)=>{
+        if(user.logged_in){
+            $(".login").html("<h1>Already logged in!</h1>")
+        }
+    })
     let new_user = new Registration();
     $("#submitBtn").click(function(){
-       new_user.register_user();
+        new_user.register_user();
     });
 });
