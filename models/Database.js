@@ -30,7 +30,7 @@ class Database {
             "full_name varchar(50)," +
             "email varchar(50) unique, " +
             "password varchar(32), " +
-            "bio varchar(100)," +
+            "bio TEXT," +
             "image varchar(100)," +
             "snapchat_handle varchar(100)," +
             "metric_1 int, " +
