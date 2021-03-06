@@ -7,6 +7,7 @@ const Login_User = require('./api/Login_User');
 const Manage_User = require('./api/Manage_User');
 const Store_Quiz = require('./api/Store_Quiz');
 const Fetch_Profile = require('./api/Fetch_Profiles');
+const Manage_Group = require('./api/Manage_Group');
 const formidable = require('formidable')
 const fs = require('fs');
 let app = express();
@@ -144,7 +145,16 @@ app.post('/api/fetch_user_metrics', (request, response) => { //add isloggedin
 app.post('/api/fetch_profile', (request, response) => { //add isloggedin
     sess = request.session;
     let user = new Manage_User();
-    user.fetch_user_with_photos(request.body.profile_id, function(res){
+    user.fetch_user_with_photos(request.body.profile_id, function (res) {
         response.send(res);
     });
 });
+
+app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 128}),
+    check('description').isLength({min: 1}), (req, res) => {
+        const group = new Manage_Group();
+        group.create_group(req.body.name, req.body.description, req.session.userid, () => {
+            return true
+        })
+        res.send({success: true})
+    })

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snazzy Spot - Home</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link href="stylesheets/main.css" rel="stylesheet"/>
+    <script src="js/main.js"></script>
+    <script src="js/groups.js"></script>
+</head>
+<body>
+<nav class="menu">
+    <div id="nav_toggle" class="title">Home<span class="fa fa-bars"></span>
+        <div class="arrow"></div>
+    </div>
+    <div class="dropdown">
+        <p><a id="signin" href="signin.html">Sign In </a></p>
+        <p><a href="register.html">Register</a></p>
+        <p>Sign Out <span class="fa fa-sign-out"></span></p>
+    </div>
+</nav>
+
+
+<div class="groups">
+    <h1>Groups</h1>
+
+    <div id="accordion">
+        <h3>Group 1</h3>
+        <div>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+        <h3>Group 2</h3>
+        <div>
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+        </div>
+        <h3>Group 3</h3>
+        <div>
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+            </ul>
+        </div>
+        <h3>Group 4</h3>
+        <div>
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+        </div>
+    </div>
+    <h1>Join a group</h1>
+    <label for="id">Group ID</label>
+    <input type="number" placeholder="1" id="id">
+    <label for="password">Password</label>
+    <input type="text" placeholder="ab34s456" id="password"/>
+    <button>Join group</button>
+    <h1>Create a group</h1>
+    <label for="name">Group name</label>
+    <input type="text" placeholder="Fred's Angels" id="name">
+    <label for="description">Description</label>
+    <textarea id="description">
+        Six intrepid friends, led by Fred, their leader, Freeeeed! Fred's Angels, mm-mm-mm! Fred's Angels, mm-mm-mm! Harnessing the power of the sun with the ancient amulet they found in the attic! Mmm-m-mm! The amulet is green! Mmm-m-mm! It's prob'ly an emerald...
+    </textarea>
+    <button onclick="createGroup()">Create group</button>
+</div>
+
+</body>
+</html>
