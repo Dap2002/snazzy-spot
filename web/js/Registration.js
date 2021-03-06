@@ -12,10 +12,11 @@ class Registration{
             body: JSON.stringify(this.user_details),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
+            console.log(json)
             if (json.success) {
                 $("#register").html(`<h1> All registered!</h1><br><span>Go <a href="/login.html">login</a></span>`)
             } else {
-                $('.error').text(`Error: ${json.error}`)
+                $('.error').text(`Error: ${json.errors.code}`)
 
             }
         });
