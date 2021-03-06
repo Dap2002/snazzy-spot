@@ -44,6 +44,25 @@ class Quiz{
             this.upload_responses();
         }
     }
+
+    upload_responses(){
+        let responses = [];
+        for (let i in this.questions){
+            responses.push(this.questions[i]["answer"]);
+        }
+        responses = {"responses":responses};
+
+        fetch('/api/submit_quiz', {
+            method: "POST",
+            body: JSON.stringify(responses),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+        }).then(response => response.json()) .then(json => {
+            console.log(json)
+
+        });
+
+    }
+
 }
 
 $(document).ready(function(){

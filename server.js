@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const Register_User = require('./api/Register_User');
 const Login_User = require('./api/Login_User');
+const Store_Quiz = require('./api/Store_Quiz');
 
 let app = express();
 app.use(express.json());
@@ -69,8 +70,16 @@ app.get('/api/status', (req, res) => {
         if (req.session.loggedInStatus) {
             res.send({logged_in: true, username: req.session.username, id: req.session.userid})
         }
-        return res.send({logged_in: false})
+        else{
+            res.send({logged_in: false})
+        }
     } catch (e) {
         return res.send({logged_in: false})
     }
-})
+});
+
+app.post("/api/submit_quiz", (request, response)=>{
+
+    let quiz = new Store_Quiz(request.body.responses);
+
+});
