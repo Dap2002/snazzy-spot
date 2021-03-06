@@ -59,7 +59,7 @@ p:hover {
   box-shadow: 0 0 30px -10px #000;
 }
 
-.register, .login, .quiz, .profile {
+.register, .login, .quiz, .profile, .profilecard {
   width: 40%;
   border-radius: 10px;
   text-align: center;
@@ -67,11 +67,11 @@ p:hover {
   margin: 10px auto;
   padding: 10px 0;
 }
-.register .error, .login .error, .quiz .error, .profile .error {
+.register .error, .login .error, .quiz .error, .profile .error, .profilecard .error {
   color: red;
   font-weight: bold;
 }
-.register button, .login button, .quiz button, .profile button {
+.register button, .login button, .quiz button, .profile button, .profilecard button {
   display: block;
   cursor: pointer;
   width: 100px;
@@ -82,15 +82,15 @@ p:hover {
   color: white;
   transition: 2s;
 }
-.register button:hover, .login button:hover, .quiz button:hover, .profile button:hover {
+.register button:hover, .login button:hover, .quiz button:hover, .profile button:hover, .profilecard button:hover {
   background-color: rgba(255, 255, 255, 0.8);
   color: coral;
   transform: scale(1.3);
 }
-.register label, .login label, .quiz label, .profile label {
+.register label, .login label, .quiz label, .profile label, .profilecard label {
   display: block;
 }
-.register input, .register textarea, .login input, .login textarea, .quiz input, .quiz textarea, .profile input, .profile textarea {
+.register input, .register textarea, .login input, .login textarea, .quiz input, .quiz textarea, .profile input, .profile textarea, .profilecard input, .profilecard textarea {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   margin: 10px 0;
@@ -98,7 +98,7 @@ p:hover {
   height: 28px;
   width: 300px;
 }
-.register textarea, .login textarea, .quiz textarea, .profile textarea {
+.register textarea, .login textarea, .quiz textarea, .profile textarea, .profilecard textarea {
   width: 475px;
   height: 150px;
   max-width: 600px;
@@ -236,6 +236,40 @@ p:hover {
 .remove-image:active {
   border: 0;
   transition: all 0.2s ease;
+}
+
+#acceptRejectDiv {
+  display: block;
+  height: 60px;
+}
+
+#acceptBtn {
+  float: right;
+  right: 8%;
+}
+
+#rejectBtn {
+  float: left;
+  left: 8%;
+}
+
+.acceptReject {
+  background-color: white;
+  border: none;
+  color: red;
+  padding: 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50%;
+  border: 6px;
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-weight: bolder;
 }
 
 /*# sourceMappingURL=main.css.map */

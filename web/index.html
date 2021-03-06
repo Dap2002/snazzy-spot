@@ -10,6 +10,7 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="stylesheets/main.css" rel="stylesheet"/>
     <script src="js/main.js"></script>
+    <script src="./js/Profiles.js"></script>
 </head>
 <body>
 <nav class="menu">
@@ -22,5 +23,23 @@
         <p>Sign Out <span class="fa fa-sign-out"></span></p>
     </div>
 </nav>
+
+<button class="acceptReject" id="rejectBtn">X</button>
+<button class="acceptReject" id="acceptBtn">✓</button>
+
+<div class="profilecard">
+    <img id="profileImage">
+    <h2 id="name"></h2>
+    <p id="bio"></p>
+    <p id="snap"></p>
+</div>
+
+<div class="profilecard">
+    <h2>Similarity rating</h2>
+    <div class="slidecontainer">
+        <input type="range" min="1" max="10" value="5" class="slider" id="answer">
+    </div>
+</div>
+
 </body>
 </html>
