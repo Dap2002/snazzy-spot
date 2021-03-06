@@ -34,9 +34,9 @@ class Database {
             "full_name varchar(50)," +
             "email varchar(50) unique, " +
             "password varchar(32), " +
-            "bio varchar(100)"+
-            "image varchar(100)"+
-            "snapchat_handle varchar(100)"+
+            "bio varchar(100),"+
+            "image varchar(100),"+
+            "snapchat_handle varchar(100),"+
             "metric_1 int, " +
             "metric_2 int, " +
             "metric_3 int," +
@@ -63,20 +63,6 @@ class Database {
         return input_array;
     }
 
-    insert_new_user(data, callback){
-        data = this.sanitize_inputs(data);
-        data["password"] = md5(data["password"]);
-        Database.conn.query("INSERT INTO users (full_name, email, password, bio, snapchat_handle) VALUES " +
-            "('"+data['full_name']+"', '"+data['email']+"', '"+data['password']+"','"+data['bio']+"', '"+data['snapchat']+"');", function(err){
-            console.debug("Attempted to add new user.");
-            if (err) {
-                return callback(false);
-            }
-            else{
-                return callback(true);
-            }
-        });
-    }
 
     check_user(data, callback){
         data = this.sanitize_inputs(data);

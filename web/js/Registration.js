@@ -7,17 +7,17 @@ class Registration{
             "bio":$("#bio").val(),
             "snapchat":$("#snapchat").val()
         };
+        console.log(this.user_details);
         fetch('/', {
             method: "POST",
             body: JSON.stringify(this.user_details),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
-            console.debug(json);
+            console.log(json);
         });
     }
 
 }
-
 
 $(document).ready(function(){
     let new_user = new Registration();
