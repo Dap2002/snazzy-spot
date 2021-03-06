@@ -179,18 +179,22 @@ p:hover {
 
 .image-upload-wrap {
   margin-top: 20px;
-  border: 4px dashed #1FB264;
+  border: 2px dashed coral;
   position: relative;
+  transition: all 1.2s;
 }
 
 .image-dropping, .image-upload-wrap:hover {
-  background-color: #1FB264;
+  background-color: coral;
   border: 4px dashed #ffffff;
 }
 
 .image-title-wrap {
   padding: 0 15px 15px 15px;
   color: #222;
+}
+.image-title-wrap button {
+  min-width: 200px;
 }
 
 .drag-text {
@@ -199,7 +203,6 @@ p:hover {
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #15824B;
   padding: 60px 0;
 }
 
