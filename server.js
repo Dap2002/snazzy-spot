@@ -34,11 +34,17 @@ app.post("/api/register",
     (request, response) => {
         const errors = validationResult(request);
         if (!errors.isEmpty()) {
-            response.send({"success": false});
+            response.send({"success": false, "errors":errors});
         } else {
             let new_user = new Register_User(request.body);
             new_user.insert_new_user(function (result) {
-                response.send({"success": result});
+                if(result === true){
+                    response.send({"success": result});
+                }
+                else{
+                    response.send({"success": false, "errors":result});
+
+                }
             });
         }
     });

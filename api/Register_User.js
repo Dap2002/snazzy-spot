@@ -13,7 +13,7 @@ class Register_User extends Database{
             "('"+this.user_data['full_name']+"', '"+this.user_data['email']+"', '"+this.user_data['password']+"','"+this.user_data['bio']+"', '"+this.user_data['snapchat']+"');", function(err){
             console.debug("Attempted to add new user.");
             if (err) {
-                return callback(false);
+                return callback(err);
             }
             else{
                 return callback(true);
