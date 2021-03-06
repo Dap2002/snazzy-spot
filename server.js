@@ -26,11 +26,11 @@ var sess;
 const {check, validationResult} = require("express-validator");
 // Format for a route: app.post('/intended route', (request, result)=>{doSomething})
 app.post("/api/register",
-    check('full_name').isLength({min: 3}),
-    check('email').isEmail(),
-    check('password').isStrongPassword(),
-    check('bio').isLength({min: 10, max: 200}),
-    check('snapchat').isLength({min: 2, max: 128}),
+    check('full_name').isLength({min: 3}).escape(),
+    check('email').isEmail().escape(),
+    check('password').isStrongPassword().escape(),
+    check('bio').isLength({min: 10, max: 200}).escape(),
+    check('snapchat').isLength({min: 2, max: 128}).escape(),
     (request, response) => {
         const errors = validationResult(request);
         if (!errors.isEmpty()) {
@@ -52,16 +52,25 @@ app.post("/api/register",
 
 app.post("/api/login", (request, response)=>{
     sess = request.session;
-   let login_session = new Login_User(request.body);
-   login_session.check_user(function(result){
-       if(!result){
-           response.send({"success": false});
-       }
-       else{
-           sess.userid = result[0]["id"];
-           sess.loggedInStatus = true;
-           sess.username = result[0]["full_name"];
-           response.send({success:true});
-       }
-   });
+    let login_session = new Login_User(request.body);
+    login_session.check_user(function(result){
+        if (!result) {
+            response.send({"success": false});
+        } else {
+            sess.userid = result[0]["id"];
+            sess.loggedInStatus = true;
+            sess.username = result[0]["full_name"];
+            response.send({success: true});
+        }
+    });
 });
+app.get('/api/status', (req, res) => {
+    try {
+        if (req.session.loggedInStatus) {
+            res.send({logged_in: true, username: req.session.username, id: req.session.userid})
+        }
+        return res.send({logged_in: false})
+    } catch (e) {
+        return res.send({logged_in: false})
+    }
+})
