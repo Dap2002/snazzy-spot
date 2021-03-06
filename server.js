@@ -5,12 +5,8 @@ const path = require('path');
 
 let app = express();
 app.use(express.json());
-app.use(express.static(__dirname+"/front-end"));
-app.use(express.static(__dirname +"/web"));
 //static content
-app.use("/css", express.static("/web/css"));
-app.use('/js', express.static(__dirname + '/web/js'));
-app.use('/images', express.static(__dirname + '/web/mages'));
+app.use("/", express.static(__dirname + '/web'));
 app.use("./js", express.static("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"));
 
 const server = http.createServer(app);
