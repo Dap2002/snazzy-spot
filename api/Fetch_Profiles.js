@@ -5,8 +5,12 @@ class Fetch_Profiles extends Database{
         super();
         this.user_id = user_id;
     }
-    fetch_profiles(){
-        let sql = "SELECT * FROM users, views WHERE ";
+    fetch_profiles(callback){
+        let sql = "SELECT * FROM users, views WHERE NOT users.id = "+this.user_id+" AND NOT(views.user1 = "+this.user_id+" AND views.user2 = users.id) ORDER BY users.id ";
+        Database.conn.query(sql, function(err, result){
+            if (err) throw err;
+            return callback(result);
+        });
     }
 
 }

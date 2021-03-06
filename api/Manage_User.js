@@ -18,5 +18,19 @@ class ManageUser extends Database {
         });
     }
 
+    return_user_info(userId, callback){
+        Database.conn.query("SELECT * FROM users WHERE id ='"+userId+"';", function(err, result){
+            if (err) throw err;
+            return callback(result);
+        });
+    }
+
+    fetch_user_with_photos(userId, callback){
+        Database.conn.query("SELECT * FROM users, photos WHERE users.id='"+userId+"' AND photos.user=users.id", function(err, result){
+           if (err) throw err;
+           return callback(result);
+        });
+    }
+
 }
 module.exports = ManageUser;

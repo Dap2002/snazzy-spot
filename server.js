@@ -125,8 +125,26 @@ app.get('/api/images', isLoggedIn, (req, res) => {
     })
 });
 
-app.post('/api/fetch_profiles', isLoggedIn, (request, result) => {
+app.post('/api/fetch_profiles', (request, response) => { //add isloggedin
     sess = request.session;
-    let profiles = new Fetch_Profile(sess.userid);
-    profiles.fetch_profiles();
+    let profiles = new Fetch_Profile(1);
+    profiles.fetch_profiles(function(res){
+        response.send(res);
+    });
+});
+
+app.post('/api/fetch_user_metrics', (request, response) => { //add isloggedin
+    sess = request.session;
+    let user = new Manage_User();
+    user.return_user_info(1, function(user_metrics){
+        response.send(user_metrics);
+    });
+});
+
+app.post('/api/fetch_profile', (request, response) => { //add isloggedin
+    sess = request.session;
+    let user = new Manage_User();
+    user.fetch_user_with_photos(1, function(res){
+        response.send(res);
+    });
 });
