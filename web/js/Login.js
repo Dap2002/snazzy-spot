@@ -10,7 +10,10 @@ class Login{
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()).then(json => {
             if (json.success) {
-                window.location.href = 'index.html'
+                window.location.href = 'index.html';
+            }
+            else{
+                $("#errMsg").text("Could not sign in. Please check your email and password.");
             }
         });
     }

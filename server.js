@@ -199,15 +199,15 @@ app.post('/api/group/people', isLoggedIn, (req, res) => {
     group.get_members(req.body.id, (response) => {
         res.send(response)
     })
-})
+});
 app.get('/api/group/load', isLoggedIn, (req, res) => {
     const group = new Manage_Group();
     group.get_groups(req.session.userid, (response) => {
         res.send(response);
     })
-})
+});
 app.get('/api/logout', isLoggedIn, (req, res) => {
     req.session.destroy();
     res.send({success: true});
-})
+});
 

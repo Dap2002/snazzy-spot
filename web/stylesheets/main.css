@@ -355,4 +355,9 @@ span {
   height: 75px;
 }
 
+#errMsg {
+  color: red;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=main.css.map */

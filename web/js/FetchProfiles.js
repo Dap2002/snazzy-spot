@@ -17,7 +17,7 @@ class FetchProfiles{
                 if(this.current_profile_index >= this.profiles.length){
                     this.show_error();
                 }
-                this.select_profile(this.profiles[this.current_profile_index]["id"]);
+                this.select_profile(this.profiles[this.current_profile_index]["id"], this.profiles[this.current_profile_index]["average"]);
             }
             else{
                 alert("Error - could not accept/reject!");
@@ -76,7 +76,7 @@ class FetchProfiles{
         });
     }
 
-    select_profile(profile_id){
+    select_profile(profile_id, similarity_rating){
         fetch('/api/fetch_profile', {
             method: "POST",
             body: JSON.stringify({"profile_id":profile_id}),
@@ -88,6 +88,7 @@ class FetchProfiles{
             $("#bio").text(json[0]["bio"]);
             $("#snap").text(json[0]["snapchat_handle"]);
             this.current_profile_id = json[0]["id"];
+            $("#answer").attr("value", similarity_rating);
         });
     }
 
@@ -103,11 +104,11 @@ $(document).ready(function(){
     let display_profile = new FetchProfiles();
     display_profile.get_user_metrics();
     display_profile.fetch_profiles_list();
-    if(display_profile.profiles.length == 0){
-       display_profile.show_error();
-    }
+    //if(display_profile.profiles.length == 0){
+    //   display_profile.show_error();
+    //}
     display_profile.sort_profiles();
-    display_profile.select_profile(1);
+    display_profile.select_profile(1, 2);
     $("#rejectBtn").click(function(){
         display_profile.accept_or_reject(display_profile.current_profile_id, 0);
     });
