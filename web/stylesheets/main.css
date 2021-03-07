@@ -338,6 +338,7 @@ span {
 }
 .match_div h2 {
   display: inline-block;
+  float: right;
   padding: 0;
   margin: 0;
   top: 50%;
@@ -348,6 +349,10 @@ span {
 }
 .match_div p {
   margin-top: 40px;
+}
+
+.snapcode svg {
+  height: 75px;
 }
 
 /*# sourceMappingURL=main.css.map */
