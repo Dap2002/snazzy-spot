@@ -52,7 +52,7 @@ class Database {
                                  constraint photos_users_id_fk
                                      foreign key (user) references users (id)
                                          on update cascade on delete cascade
-
+                                 
                              )
             comment 'table for storing all the photos';`, (err) => {
             if (err) throw err;
@@ -60,12 +60,10 @@ class Database {
 
         Database.conn.query("CREATE TABLE IF NOT EXISTS views (user1 int not null, user2 int not null, " +
             "accept int not null, foreign key(user1) references users(id) on update cascade on delete cascade, " +
-            "foreign key(user2) references users(id) on update cascade on delete cascade)", function (err, result) {
+            "foreign key(user2) references users(id) on update cascade on delete cascade)", function(err, result){
             if (err) throw err;
         });
 
-        Database.conn.query("create table if not exists `groups`(group_id int auto_increment primary key, group_name varchar(128) null, group_description text null);" +
-            "create table if not exists group_users(group_id int null, user_id  int null, constraint group_users_groups_group_id_fk foreign key (group_id) references `groups` (group_id) on update cascade on delete cascade, constraint group_users_users_id_fk foreign key (user_id) references users (id) on update cascade on delete cascade);")
     }
 
     read_table(sql, callback){

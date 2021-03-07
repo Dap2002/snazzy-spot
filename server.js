@@ -150,19 +150,28 @@ app.post('/api/fetch_profile', (request, response) => { //add isloggedin
     });
 });
 
+app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 128}),
+    check('description').isLength({min: 1}), (req, res) => {
+        const group = new Manage_Group();
+        group.create_group(req.body.name, req.body.description, req.session.userid, () => {
+            return true
+        });
+        res.send({success: true})
+    });
 
 app.post('/api/accept_reject',(request, response) => {
     sess = request.session;
     const acceptOrReject = new Manage_User();
-    acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function (result) {
-        if (result["affectedRows"] === 1) {
-            response.send({"success": true});
-        } else {
-            response.send({"success": false});
+    acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
+        if(result["affectedRows"] == 1){
+            response.send({"success":true});
+        }
+        else{
+            response.send({"success":false});
         }
     });
+});
 
-<<<<<<< HEAD
 app.post('/api/fetch_matches',(request, response) => {
     sess = request.session;
     const matches = new Manage_User();
@@ -177,42 +186,4 @@ app.post('/api/fetch_snap',(request, response) => {
     snapcode.username(request.body.snap, function(svg) {
         response.send({"svg":svg});
     });
-
 });
-=======
-});
-app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 128}),
-    check('description').isLength({min: 1}), (req, res) => {
-        const group = new Manage_Group();
-        group.create_group(req.body.name, req.body.description, req.session.userid, (group_id, passcode) => {
-            console.log(group_id, passcode)
-            group.join_group(req.session.userid, group_id, passcode, (response) => {
-                res.send({success: response});
-            })
-        });
-    });
-app.post('/api/group/join', isLoggedIn, (req, res) => {
-    const group = new Manage_Group();
-    group.join_group(req.session.userid, req.body.id, req.body.password, (response) => {
-        res.send({success: response});
-    })
-});
-app.post('/api/group/people', isLoggedIn, (req,res)=>{
-    const group = new Manage_Group();
-    group.get_members(req.body.id, (response)=>{
-        res.send(response)
-    })
-})
-app.get('/api/group/load', isLoggedIn, (req, res) => {
-    const group = new Manage_Group();
-    group.get_groups(req.session.userid, (response) => {
-        res.send(response);
-    })
-})
-app.get('/api/logout', isLoggedIn, (req,res)=>{
-    req.session.destroy();
-    res.send({success:true})
-})
-
-
->>>>>>> ab77747c7daf9d6528868301f007cf29a00d04a0

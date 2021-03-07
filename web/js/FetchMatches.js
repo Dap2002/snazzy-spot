@@ -16,7 +16,7 @@ class FetchMatches{
                     }).then(response => response.json()) .then(json => {
                         let svg = json["svg"];
                         $("#matches").css("display", "none");
-                        $("body").append("<div id='snap_code' class='profilecard'><h1>Snap code:</h1><div class='snapDiv'>"+svg+"</div><button id='returnBtn'>Return</button></div>");
+                        $("body").append("<div id='snap_code' class='profilecard'><div class='snapDiv'>"+svg+"</div><button id='returnBtn'>Return</button></div>");
                         $("#returnBtn").click(function(){
                            $("#matches").css("display", "block");
                            $("#snap_code").remove();
