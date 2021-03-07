@@ -194,6 +194,12 @@ app.post('/api/group/join', isLoggedIn, (req, res) => {
         res.send({success: response});
     });
 });
+app.post('/api/group/add', isLoggedIn, (req, res) => {
+    const group = new Manage_Group();
+    group.add_group(req.session.userid, req.body.group_id, (response) => {
+        res.send({success: response})
+    })
+})
 app.post('/api/group/people', isLoggedIn, (req, res) => {
     const group = new Manage_Group();
     group.get_members(req.body.id, (response) => {

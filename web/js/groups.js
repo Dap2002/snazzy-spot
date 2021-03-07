@@ -28,7 +28,6 @@ function loadGroups() {
     fetch('/api/group/load', {
         method: "GET",
     }).then(response => response.json()).then(json => {
-        console.log(json)
         for (let i = 0; i < json.length; i++) {
             $("#accordion").append(`<h3>${json[i].group_name}</h3><ul><p>
             <strong>Group ID:</strong>${json[i].group_id} <br/><strong>Group password:</strong>${json[i].group_passcode}<br/> ${json[i].group_description}<br />

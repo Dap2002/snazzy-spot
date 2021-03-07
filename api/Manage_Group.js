@@ -53,5 +53,12 @@ class ManageGroup extends Database {
         })
     }
 
+    add_group(user, group_id, callback) {
+        Database.conn.query(`INSERT INTO group_users(group_id, user_id)
+                             VALUES (?, ?)`, [group_id, user], (result, rows)=>{
+            callback(true);
+        })
+    }
+
 }
 module.exports = ManageGroup
