@@ -18,8 +18,10 @@
     "md5": "^2.3.0",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
+    "request": "^2.88.2",
     "sanitizer": "^0.1.3",
     "sass": "^1.32.8",
+    "snapcode": "^1.0.1",
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {

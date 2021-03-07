@@ -175,7 +175,16 @@ app.post('/api/accept_reject',(request, response) => {
 app.post('/api/fetch_matches',(request, response) => {
     sess = request.session;
     const matches = new Manage_User();
-    matches.fetch_matches(sess.userid, function(result){
-        console.debug(result);
+    matches.fetch_matches(1, function(result){
+        response.send(result)
     });
+});
+
+app.post('/api/fetch_snap',(request, response) => {
+    let snapcode = require('snapcode');
+    console.debug(request.body);
+    snapcode.username(request.body.snap, function(svg) {
+        response.send({"svg":svg});
+    });
+
 });

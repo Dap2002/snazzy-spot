@@ -1,8 +1,11 @@
 const Database = require("../models/Database");
 
+
+
 class ManageUser extends Database {
     constructor() {
-        super()
+        super();
+        this.matches_list = [];
     }
 
     static addImage(user, path, extension) {
@@ -39,8 +42,33 @@ class ManageUser extends Database {
         });
     }
 
+    static matches_list_final = [];
+
     fetch_matches(userId, callback){
-        Database.conn.query("SELECT * FROM users, ")
+        Database.conn.query("SELECT * FROM users, views, photos WHERE users.id='"+userId+"' AND views.user1='"+userId+"' AND views.accept ='1' GROUP BY views.user2;", function(err, result){
+            if (err) throw err;
+            let query_string = "SELECT DISTINCT user1 FROM users, views WHERE ";
+            for (let i in result) {
+                let user2Id = result[i]["user2"];
+                query_string += " views.user1='" + user2Id + "' AND views.accept='1' AND views.user2='" + userId + "' ";
+                if(i != result.length-1){
+                    query_string+= "OR";
+                }
+            }
+            query_string+="ORDER BY views.user1";
+            Database.conn.query(query_string, function(err, result2){
+               if (err) throw err;
+               console.log(userId);
+               let new_array = [];
+               for (let i in result2){
+                   if (result2[i]["id"] != userId){
+                       new_array.push(result[i]);
+                   }
+               }
+              return callback(new_array);
+            });
+
+        });
     }
 
 }
