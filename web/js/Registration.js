@@ -13,7 +13,7 @@ class Registration{
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
             if (json.success) {
-                $(".register").html(`<h1> All registered!</h1><span>Go <a href="/login.html">login</a></span>`)
+                $(".register").html(`<h1> All registered!</h1><span>Go <a href="/signin.html">login</a></span>`)
             } else {
                 let err_msg = json["errors"][0];
                 console.log(err_msg);

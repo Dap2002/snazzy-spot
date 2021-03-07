@@ -319,11 +319,11 @@ span {
 }
 
 .match_div {
+  margin-bottom: 15px;
   border-bottom: 0.5px dashed grey;
   padding: 30px;
 }
 .match_div img {
-  border-radius: 50%;
   width: 20%;
   display: inline-block;
   left: 10px;
