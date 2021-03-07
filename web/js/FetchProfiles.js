@@ -1,7 +1,7 @@
 class FetchProfiles{
     constructor() {
         this.profiles = [];
-        this.own_profile = []
+        this.own_profile = [];
         this.current_profile_id = null;
         this.current_profile_index = 0;
     }
@@ -107,11 +107,11 @@ $(document).ready(function(){
     let display_profile = new FetchProfiles();
     display_profile.get_user_metrics();
     display_profile.fetch_profiles_list();
-    //if(display_profile.profiles.length == 0){
-    //   display_profile.show_error();
-    //}
+    if(display_profile.profiles.length == 0){
+       display_profile.show_error();
+    }
     display_profile.sort_profiles();
-    display_profile.select_profile(1, 2);
+    display_profile.select_profile(display_profile.profiles[display_profile.current_profile_index]["id"], display_profile.profiles[display_profile.current_profile_index]["average"]);
     $("#rejectBtn").click(function(){
         display_profile.accept_or_reject(display_profile.current_profile_id, 0);
     });
