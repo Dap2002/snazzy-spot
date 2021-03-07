@@ -128,7 +128,7 @@ app.get('/api/images', isLoggedIn, (req, res) => {
 
 app.post('/api/fetch_profiles', isLoggedIn, (request, response) => { //add isloggedin
     sess = request.session;
-    let profiles = new Fetch_Profile(1);
+    let profiles = new Fetch_Profile(sess.userid);
     profiles.fetch_profiles(function(res){
         response.send(res);
     });
@@ -137,7 +137,7 @@ app.post('/api/fetch_profiles', isLoggedIn, (request, response) => { //add islog
 app.post('/api/fetch_user_metrics', isLoggedIn, (request, response) => { //add isloggedin
     sess = request.session;
     let user = new Manage_User();
-    user.return_user_info(1, function(user_metrics){
+    user.return_user_info(sess.userid, function (user_metrics) {
         response.send(user_metrics);
     });
 });
@@ -153,12 +153,11 @@ app.post('/api/fetch_profile', isLoggedIn, (request, response) => { //add islogg
 app.post('/api/accept_reject', isLoggedIn, (request, response) => {
     sess = request.session;
     const acceptOrReject = new Manage_User();
-    acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
-        if(result["affectedRows"] == 1){
-            response.send({"success":true});
-        }
-        else{
-            response.send({"success":false});
+    acceptOrReject.add_accept(sess.userid, request.body.profile_id, request.body.accept, function (result) {
+        if (result["affectedRows"] === 1) {
+            response.send({"success": true});
+        } else {
+            response.send({"success": false});
         }
     });
 });
@@ -166,7 +165,7 @@ app.post('/api/accept_reject', isLoggedIn, (request, response) => {
 app.post('/api/fetch_matches', isLoggedIn, (request, response) => {
     sess = request.session;
     const matches = new Manage_User();
-    matches.fetch_matches(1, function(result){
+    matches.fetch_matches(sess.userid, function (result) {
         response.send(result)
     });
 });
