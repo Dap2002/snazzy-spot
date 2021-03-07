@@ -30,6 +30,9 @@ class FetchProfiles{
             method: "POST",
             headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => response.json()) .then(json => {
+            if(json["success"] === false){
+                window.location.assign("signin.html");
+            }
             json = json[0]
             for (let i=0; i<8; i++){
                 this.own_profile.push(json["metric_"+i+1]);

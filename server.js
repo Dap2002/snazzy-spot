@@ -185,26 +185,26 @@ app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 1
             console.log(group_id, passcode)
             group.join_group(req.session.userid, group_id, passcode, (response) => {
                 res.send({success: response});
-            })
+            });
         });
     });
 app.post('/api/group/join', isLoggedIn, (req, res) => {
     const group = new Manage_Group();
     group.join_group(req.session.userid, req.body.id, req.body.password, (response) => {
         res.send({success: response});
-    })
+    });
 });
 app.post('/api/group/people', isLoggedIn, (req, res) => {
     const group = new Manage_Group();
     group.get_members(req.body.id, (response) => {
         res.send(response)
-    })
+    });
 });
 app.get('/api/group/load', isLoggedIn, (req, res) => {
     const group = new Manage_Group();
     group.get_groups(req.session.userid, (response) => {
         res.send(response);
-    })
+    });
 });
 app.get('/api/logout', isLoggedIn, (req, res) => {
     req.session.destroy();
