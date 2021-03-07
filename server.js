@@ -162,28 +162,8 @@ app.post('/api/group/create', isLoggedIn, check('name').isLength({min: 3, max: 1
 app.post('/api/accept_reject',(request, response) => {
     sess = request.session;
     const acceptOrReject = new Manage_User();
-    acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
-        if(result["affectedRows"] == 1){
-            response.send({"success":true});
-        }
-        else{
-            response.send({"success":false});
-        }
+    acceptOrReject.add_accept(sess.userid, request.body.profile_id, request.body.accept, function(result){
+       console.debug(result);
     });
-});
 
-app.post('/api/fetch_matches',(request, response) => {
-    sess = request.session;
-    const matches = new Manage_User();
-    matches.fetch_matches(1, function(result){
-        response.send(result)
-    });
-});
-
-app.post('/api/fetch_snap',(request, response) => {
-    let snapcode = require('snapcode');
-    console.debug(request.body);
-    snapcode.username(request.body.snap, function(svg) {
-        response.send({"svg":svg});
-    });
 });
