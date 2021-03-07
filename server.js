@@ -126,7 +126,7 @@ app.get('/api/images', isLoggedIn, (req, res) => {
     })
 });
 
-app.post('/api/fetch_profiles', (request, response) => { //add isloggedin
+app.post('/api/fetch_profiles', isLoggedIn, (request, response) => { //add isloggedin
     sess = request.session;
     let profiles = new Fetch_Profile(1);
     profiles.fetch_profiles(function(res){
@@ -134,7 +134,7 @@ app.post('/api/fetch_profiles', (request, response) => { //add isloggedin
     });
 });
 
-app.post('/api/fetch_user_metrics', (request, response) => { //add isloggedin
+app.post('/api/fetch_user_metrics', isLoggedIn, (request, response) => { //add isloggedin
     sess = request.session;
     let user = new Manage_User();
     user.return_user_info(1, function(user_metrics){
@@ -142,7 +142,7 @@ app.post('/api/fetch_user_metrics', (request, response) => { //add isloggedin
     });
 });
 
-app.post('/api/fetch_profile', (request, response) => { //add isloggedin
+app.post('/api/fetch_profile', isLoggedIn, (request, response) => { //add isloggedin
     sess = request.session;
     let user = new Manage_User();
     user.fetch_user_with_photos(request.body.profile_id, function (res) {
@@ -150,7 +150,7 @@ app.post('/api/fetch_profile', (request, response) => { //add isloggedin
     });
 });
 
-app.post('/api/accept_reject',(request, response) => {
+app.post('/api/accept_reject', isLoggedIn, (request, response) => {
     sess = request.session;
     const acceptOrReject = new Manage_User();
     acceptOrReject.add_accept(1, request.body.profile_id, request.body.accept, function(result){
@@ -163,7 +163,7 @@ app.post('/api/accept_reject',(request, response) => {
     });
 });
 
-app.post('/api/fetch_matches',(request, response) => {
+app.post('/api/fetch_matches', isLoggedIn, (request, response) => {
     sess = request.session;
     const matches = new Manage_User();
     matches.fetch_matches(1, function(result){
@@ -171,7 +171,7 @@ app.post('/api/fetch_matches',(request, response) => {
     });
 });
 
-app.post('/api/fetch_snap', (request, response) => {
+app.post('/api/fetch_snap', isLoggedIn, (request, response) => {
     let snapcode = require('snapcode');
     console.debug(request.body);
     snapcode.username(request.body.snap, function (svg) {
