@@ -9,17 +9,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="stylesheets/main.css" rel="stylesheet"/>
+    <script src="js/main.js"></script>
     <script src="js/FetchMatches.js"></script>
 </head>
 <body>
 <nav class="menu">
-    <div id="nav_toggle" class="title">Sign In<span class="fa fa-bars"></span>
+    <div id="nav_toggle" class="title">Matches<span class="fa fa-bars"></span>
         <div class="arrow"></div>
     </div>
     <div class="dropdown">
         <p><a href="index.html">Home</a></p>
-        <p><a href="register.html">Register </a></p>
-        <p>Sign Out <span class="fa fa-sign-out"></span></p>
+        <p><a id="signin" href="signin.html">Sign In </a></p>
+        <p><a href="groups.html">Groups</a></p>
+        <p id="signout"><a href="#" onclick="signOut()">Sign Out <span class="fa fa-sign-out"></span></a></p>
     </div>
 </nav>
 <div class="profilecard" id="matches">
